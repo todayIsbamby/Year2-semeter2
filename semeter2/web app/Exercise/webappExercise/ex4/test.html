@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      a {
+        color: fuchsia;
+        cursor: pointer;
+      }
+    </style>
+    <script>
+      var worker;
+
+      // date-button start worker
+      function startWorker() {
+        const dataButtonElement = document.getElementById("date-button");
+        
+        worker = new Worker("webworker.js");
+        worker.onmessage = function (event) {
+          const { date, color } = event.data;
+
+          dataButtonElement.innerText = date;
+          dataButtonElement.style.backgroundColor = color;
+
+          dataButtonElement.style.position = "absolute";
+          dataButtonElement.style.right = '0px';
+          dataButtonElement.style.top = '0px';
+        };
+      }
+
+      // date-button stop worker
+      function stopWorker() {
+        const dataButtonElement = document.getElementById("date-button");
+        dataButtonElement.style.position = null;
+        dataButtonElement.style.right = null;
+        dataButtonElement.style.top = null;
+
+        worker.terminate();
+        worker = undefined;
+      }
+
+      // date-button
+      function handleToggleDateButton() {
+        if (!worker) {
+          startWorker();
+        } else {
+          stopWorker();
+        }
+      }
+
+      // members-a
+      function handleToggleMembersA() {
+        const memberListElement = document.getElementById("personal-info");
+        if (memberListElement.hasChildNodes()) {
+          memberListElement.innerHTML = "";
+        } else {
+          const memberDatas = [
+            "Nisachon Yudee, ID: 64010443",
+            "Subject: Web Application Development",
+            "Semester: 2",
+          ];
+          memberDatas.forEach((memberData) => {
+            const memberElement = document.createElement("li");
+            memberElement.innerText = memberData;
+            memberListElement.appendChild(memberElement);
+          });
+        }
+      }
+
+      // showing-image
+      function handleChangeShowingImageSrc(newImageSrc) {
+        const showingImageElement = document.getElementById("showing-image");
+        showingImageElement.src = newImageSrc;
+      }
+
+      // utils
+      function handleMouseEnterA(textElement) {
+        textElement.style.backgroundColor = "black";
+        textElement.style.color = "pink";
+      }
+      function handleMouseLeaveA(textElement) {
+        textElement.style.backgroundColor = "transparent";
+        textElement.style.color = "fuchsia";
+      }
+    </script>
+    <title>Software Studio JavaScript</title>
+  </head>
+  <body>
+    <h2>JavaScript&DOM</h2>
+    <button id="date-button" onclick="handleToggleDateButton()">
+      Click me to display Date and Time.
+    </button>
+    <div style="margin-top: 1.5rem">
+      <a
+        id="personal-a"
+        onclick="handleToggleMembersA()"
+        onmouseenter="handleMouseEnterA(this)"
+        onmouseleave="handleMouseLeaveA(this)"
+        >Personal Info</a
+      >
+      <ul id="personal-info"></ul>
+    </div>
+
+    <h1>Snapshots</h1>
+    <ul>
+      <li>
+        <a
+          onclick="handleChangeShowingImageSrc('https://milelimit.com/wp-content/uploads/2021/02/MASERATI-MC20.jpg')"
+          >Supercar</a
+        >
+      </li>
+      <li>
+        <a
+          onclick="handleChangeShowingImageSrc('https://upload.wikimedia.org/wikipedia/commons/4/4e/Eniac.jpg')"
+          >Eniac</a
+        >
+      </li>
+      <li>
+        <a
+          onclick="handleChangeShowingImageSrc('https://www.matichon.co.th/wp-content/uploads/2020/10/eiffel-tower-3349075_1920.jpg')"
+          >Eiffle Tower</a
+        >
+      </li>
+      <li>
+        <a
+          onclick="handleChangeShowingImageSrc('https://cdn.britannica.com/69/155469-131-14083F59/airplane-flight.jpg')"
+          >Air Plane</a
+        >
+      </li>
+    </ul>
+    <img
+      id="showing-image"
+      style="width: 720px"
+      src="https://images.ctfassets.net/hrltx12pl8hq/4plHDVeTkWuFMihxQnzBSb/aea2f06d675c3d710d095306e377382f/shutterstock_554314555_copy.jpg"
+    />
+  </body>
+</html>
