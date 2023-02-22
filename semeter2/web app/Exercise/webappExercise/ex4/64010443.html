@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head></head>
+
+  <body>
+    <div id="maincontainer"></div>
+    <script>
+      var worker = undefined;
+
+      const mainDiv = document.getElementById("maincontainer");
+
+      const headerH1 = document.createElement("h1");
+      headerH1.textContent = "Exercise 04: JavaScript&DOM";
+      // insert headerH1 into mainDiv
+      mainDiv.appendChild(headerH1);
+      // insert headerH1 into mainDiv
+
+      const timeCountButton = document.createElement("button");
+      timeCountButton.textContent = "Click me to display Date and Time";
+      timeCountButton.onclick = function () {
+        if (!worker) {
+          startWorker();
+        } else {
+          stopWorker();
+        }
+      };
+      function startWorker() {
+        if (typeof worker === "undefined") {
+          worker = new Worker("worker.js");
+        }
+        worker.onmessage = function (event) {
+          const { date, color } = event.data;
+
+          timeCountButton.textContent = date;
+          timeCountButton.style.backgroundColor = color;
+
+          timeCountButton.style.position = "absolute";
+          timeCountButton.style.right = "0px";
+          timeCountButton.style.top = "0px";
+        };
+      }
+      function stopWorker() {
+        timeCountButton.style.position = null;
+        timeCountButton.style.right = null;
+        timeCountButton.style.top = null;
+
+        worker.terminate();
+        worker = undefined;
+      }
+      // insert timeCountButton into mainDiv
+      mainDiv.appendChild(timeCountButton);
+      // insert timeCountButton into mainDiv
+
+      // insert br tag into mainDiv
+      mainDiv.appendChild(document.createElement("br"));
+      mainDiv.appendChild(document.createElement("br"));
+      // insert br tag into mainDiv
+
+      const personalInfoA = document.createElement("a");
+      personalInfoA.textContent = "Personal Info";
+      personalInfoA.style.cursor = "pointer";
+      personalInfoA.style.textDecoration = "underline";
+      personalInfoA.style.color = "pink";
+      personalInfoA.style.backgroundColor = "transparent";
+      personalInfoA.onmouseover = function () {
+        personalInfoA.style.color = "blue";
+        personalInfoA.style.backgroundColor = "yellow";
+      };
+      personalInfoA.onmouseout = function () {
+        personalInfoA.style.color = "pink";
+        personalInfoA.style.backgroundColor = "transparent";
+      };
+      // insert personalInfoA into mainDiv
+      mainDiv.appendChild(personalInfoA);
+      // insert personalInfoA into mainDiv
+
+      let personalDatas = [
+        "Nisachon Yudee, ID: 64010443",
+        "Subject: Web Application Development",
+        "Semester: 2",
+      ];
+      const personalInfoUl = document.createElement("ul");
+      personalInfoUl.hidden = true;
+      personalInfoA.onclick = function () {
+        personalInfoUl.hidden = !personalInfoUl.hidden;
+      };
+      for (let i = 0; i < personalDatas.length; i++) {
+        const personalDataLi = document.createElement("li");
+        personalDataLi.textContent = personalDatas[i];
+
+        // insert personalDataLi into personalInfoUl
+        personalInfoUl.appendChild(personalDataLi);
+        // insert personalDataLi into personalInfoUl
+      }
+      // insert personalInfoUl into mainDiv
+      mainDiv.appendChild(personalInfoUl);
+      // insert personalInfoA into mainDiv
+
+      // insert br tag into mainDiv
+      mainDiv.appendChild(document.createElement("br"));
+      // insert br tag into mainDiv
+
+      const snapshotsHeaderH1 = document.createElement("h1");
+      snapshotsHeaderH1.textContent = "Snapshots";
+      // insert snapshotsHeaderH1 into mainDiv
+      mainDiv.appendChild(snapshotsHeaderH1);
+      // insert snapshotsHeaderH1 into mainDiv
+
+      const imageImg = document.createElement("img");
+      imageImg.src =
+        "https://d3rf6j5nx5r04a.cloudfront.net/198gIUgmuOj-6_o7E79DmsvkNNc=/2000x1000/blog/d/2/9/d290359d324744d6a72beb27a3ab92a9.jpg";
+      imageImg.style.width = "30%";
+
+      let snapshotTitles = ["Fireworks", "Crest", "Action", "Buffalo"];
+      let snapshotImgSrcs = [
+        "https://th.bing.com/th/id/R.0948ffdbf1b7161a2a3f36d239c33355?rik=alnMD0ca39AkjA&pid=ImgRaw&r=0",
+        "https://th.bing.com/th/id/R.688d608c5087df5847c0f7deb37b4ddb?rik=E1d5I0Cm33kD%2bw&pid=ImgRaw&r=0",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Mookie_Betts_hitting_the_ball_%2836478781664%29.jpg/640px-Mookie_Betts_hitting_the_ball_%2836478781664%29.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/African_buffalo_%28Syncerus_caffer_caffer%29_male_with_cattle_egret.jpg/1200px-African_buffalo_%28Syncerus_caffer_caffer%29_male_with_cattle_egret.jpg",
+      ];
+      const snapshotsUl = document.createElement("ul");
+      for (let i = 0; i < snapshotImgSrcs.length; i++) {
+        const snapshotTitleLi = document.createElement("li");
+        snapshotTitleLi.textContent = snapshotTitles[i];
+        snapshotTitleLi.style.cursor = "pointer";
+        snapshotTitleLi.style.color = "blue";
+        snapshotTitleLi.style.textDecoration = "underline";
+        snapshotTitleLi.onclick = function () {
+          imageImg.src = snapshotImgSrcs[i];
+        };
+
+        // insert snapshotTitleLi into snapshotsUl
+        snapshotsUl.appendChild(snapshotTitleLi);
+        // insert snapshotTitleLi into snapshotsUl
+      }
+      // insert snapshotsUl into mainDiv
+      mainDiv.appendChild(snapshotsUl);
+      // insert snapshotsUl into mainDiv
+
+      // insert imageImg into mainDiv
+      mainDiv.appendChild(imageImg);
+      // insert imageImg into mainDiv
+    </script>
+  </body>
+</html>
