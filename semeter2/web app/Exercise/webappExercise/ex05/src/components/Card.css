@@ -1,0 +1,66 @@
+.flexBox{
+    display: flex;
+    justify-content: center;
+    
+}
+
+.groupButton{
+    display: flex;
+    justify-content: center;
+    align-items:center ;
+    height:40px;
+    margin-bottom: 20px;
+    
+}
+
+.score{
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color: rgb(74, 217, 74);
+    border: 2.5px solid rgb(139, 87, 161);
+    border-radius: 5px;
+    width: fit-content;
+    height:40px;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+}
+
+.scoreText{
+    font-size: 20px;
+    font-weight: 900;
+    color:rgb(139, 87, 161);
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+button{
+    width: fit-content;
+    height: 30px;
+}
+
+.Foods{
+    background-color: blanchedalmond;
+    border:2px solid black;
+    border-radius: 10px;
+    margin-left: 250px;
+    margin-right: 250px
+    
+}
+
+.infoAndPhoto{
+    margin-top:20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    display:flex;
+}
+
+.info{
+    margin-right:10px;
+    text-align: start;
+}
+
+img{
+    width:35%;
+    height:35%;
+}
